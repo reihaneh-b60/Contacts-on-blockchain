@@ -3,7 +3,7 @@
 pragma solidity >=0.4.22 <0.9.0;
 
 contract Contacts {
-  address owner= msg.sender;
+  address private owner;
   uint public count = 0; // state variable
 
   struct Contact {
@@ -13,6 +13,7 @@ contract Contacts {
 	}
 
 	constructor() public {
+		owner = msg.sender;
 		createContact('Reyhaneh', '09163452382');
 	}
 
@@ -50,6 +51,11 @@ contract Contacts {
 			delete contacts[i];
 		count=0;
 
+	}
+	
+	function change_owner(address new_owner,uint gasValue) public onlyOwner {
+		// require(condition);
+		owner = new_owner;
 	}
 
 	// function delContact(uint index) public  {
